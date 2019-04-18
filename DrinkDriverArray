@@ -1,0 +1,87 @@
+package itp120mod5;
+
+import java.text.NumberFormat;
+import java.util.Scanner;
+
+public class DrinkDriverArray {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		Scanner scan = new Scanner(System.in);
+		Drinks[] orders = new Drinks[20];
+		
+		String drink;
+		char size;
+		double costEach;
+		int numOrdered;
+		
+		int counter = 0;
+		String more = "yes";
+		
+		while(more.equals("yes") ){
+			
+			//get order information
+			System.out.println("Enter the type of drink:");
+			drink = scan.nextLine();
+			
+			System.out.println("What size? (S, M, or L)");
+			String sizeString = scan.nextLine();
+			size = sizeString.charAt(0);
+			while(Character.toUpperCase(size) != 'S' && Character.toUpperCase(size) != 'M' 
+					&& Character.toUpperCase(size) != 'L'){
+				System.out.println("Invalid size selection. Choose size S, M, or L.");
+				sizeString = scan.nextLine();
+				size = sizeString.charAt(0);
+			}
+			
+			System.out.println("Enter the cost per drink:");
+			costEach = scan.nextDouble();
+			
+			System.out.println("Enter the number of these drinks purchased:");
+			numOrdered = scan.nextInt();
+			
+			//store order info			
+			Drinks order = new Drinks(drink, size, costEach, numOrdered);		
+			orders[counter] = order;
+			
+			scan.nextLine();
+			System.out.println("Enter another drink ordered? (yes or no)");
+			more = scan.nextLine();
+			
+			counter++;
+		}
+		
+		NumberFormat cur = NumberFormat.getCurrencyInstance();
+		
+		printOrders(orders, counter);
+		System.out.println("The total number of tickets purchased is "+totalNum(orders, counter)+".");
+		System.out.println("The cost of all the drinks purchased for all orders is "+
+			cur.format(totalCost(orders, counter))+".");
+
+	}
+	
+	public static void printOrders(Drinks[] arr, int num){
+		System.out.println("The orders are:");
+		for(int i = 0; i < num; i++){
+			System.out.println(arr[i].toString());
+		}
+	}
+	
+	public static int totalNum(Drinks[] arr, int num){
+		int total = 0;
+		for(int i = 0; i < num; i++){
+			total += arr[i].getNumOrdered();
+		}
+		return total;
+	}
+	
+	public static double totalCost(Drinks[] arr, int num){
+		double total = 0;
+		for(int i = 0; i < num; i++){
+			total += arr[i].total();
+		}
+		return total;
+	}
+
+}
