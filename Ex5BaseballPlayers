@@ -1,0 +1,146 @@
+package itp120mod5;
+import java.util.ArrayList;
+
+public class Ex5BaseballPlayers
+{
+   //-----------------------------------------------------------------
+   //  Stores and modifies a list of baseball players.
+   //-----------------------------------------------------------------
+   // NOte:  We could (and probably should) create a Player blueprint
+	// and use that.  But in this case, I just want an array list 
+	// of Strings. 
+	public static void main (String[] args)
+   {
+		// always make your array lists generic
+      ArrayList<String> players = new ArrayList<String>();
+
+      players.add("Max Scherzer");
+      players.add ("Madison Bumgardner");
+      players.add ("Jason Kipnis");
+      players.add ("Mike Trout");
+      players.add("Paul Goldschmidt");
+      players.add ("Adrian Gonzalez");
+      players.add("Jose Altuve");
+      players.add("Steven Strasburg");
+      players.add("Paul Goldschmidt");
+      players.add("Kris Bryant");
+      players.add("Bryce Harper");
+      players.add ("Salvador Perez");
+      players.add("Paul Goldschmidt");
+      players.add("Paul Goldschmidt");// yes - I know he is here many timesbut I need that for later
+
+      // You could use the following to print out all of the players
+      // since Java will call the toString() on each individual item if you do not
+      // but it is better to do it explicitly yourself
+      //System.out.println (players);
+      System.out.println("The baseball players are: ");
+      for (int i=0;i<players.size();i++)
+    	  System.out.println(players.get(i).toString());
+      
+      // Note the line above---if this was anything but Strings in the array list
+      // it would work the same way but I would explicitly call the toString() method.
+
+      // Now let's remove Adrian Gonzalez   
+      int location = players.indexOf ("Adrian Gonzalez");
+      players.remove (players.indexOf ("Adrian Gonzalez"));
+
+      // Prove that it worked by printing the information out
+      System.out.println("\n Without Adrian:");
+      for (int i=0;i<players.size();i++)
+    	  System.out.println(players.get(i));
+      
+      // Find out who is the third one on the list (remember that we start counting at zero
+      System.out.println ("\nThe third player in the list now is " + players.get(2));
+
+      // Add in Zack Greinke as the fourth player
+     
+      players.add (3, "Zack Greinke");
+      
+      
+      //Print these out
+      System.out.println("\nWith Zack added as the fourth player we now have:");
+      for (int i=0;i<players.size();i++)
+    	  System.out.println(players.get(i));
+
+      // print out how many players there are
+      System.out.println("\nThe number of players is now  "+ players.size());
+      
+      
+      //YOU DO THE FOLLOWING.  FIND METHODS FOR THESE!!
+      
+      //  check to see if Adrian Gonzalez is on the player list.  It should print true or false.
+      System.out.println("\nAdrian Gonzales is on the player list: "+
+    		  players.contains("Adrian Gonzalez"));
+      
+      // find out the index for the location of Steven Strasburg 
+      System.out.println("\nSteven Strasburg's location: "+players.indexOf("Steven Strasburg"));
+      
+      
+      // find the indexes for Paul Goldschmidt.  There is no single method to do this. 
+      // Loop through the array list.  Use the method .equals to compare the entry to "Mike Trout"
+      // print out the index number if it is equal.
+      // NOTE: For Strings you cannot use == (this can only be used for primitive data types)
+      // for objects == checks to see if it is the same object ---not that the contents are the same
+      ArrayList<Integer> indexes = new ArrayList<Integer>();
+      for(int i = 0; i < players.size(); i++){
+    	  if(players.get(i).equals("Paul Goldschmidt")){
+    		  indexes.add(i);
+    	  };
+      }
+      System.out.print("\nIndexes for Paul Goldschmidt are: ");
+      for(int i = 0; i < indexes.size(); i++){
+    	  System.out.print(indexes.get(i));
+    	  if(i+1 < indexes.size()){
+    		  System.out.print(", ");
+    	  } else {
+    		  System.out.println(".");
+    	  }
+      }
+	
+		
+      //  find all of the players whose first names start with the letter J or M.  
+      // Print these.  HINT!!!  There is 
+      // no single method for this.  You will need to loop through the ArrayList getting
+      // each entry and checking to see if the string starts with an J or M. 
+		System.out.println("\nAll players that start with J or M:");
+		for(int i = 0; i < players.size(); i++){
+			if(players.get(i).charAt(0) == 'J' || players.get(i).charAt(0) == 'M'){
+				System.out.println(players.get(i).toString());
+			}
+		}
+   
+      // find a way to print out the list of the LAST names of the players. (Hint:  I would use substrings or the String split method)
+		System.out.println("\nPlayers last names:");
+		for(int i = 0; i < players.size(); i++){
+			String lastName = players.get(i).substring(players.get(i).indexOf(' ')+1);
+			System.out.println(lastName);
+		}
+		
+		
+		
+		System.out.println("\nSecond way to get players last names:");
+		for(int i = 0; i < players.size(); i++){
+			String names[] = players.get(i).split(" ");	
+			System.out.println(names[1]);
+		}
+      // print out the list of all of the players but all of the letters in all of the names
+      // need to be capitalized.  
+		System.out.println("\nPlayers capitalized:");
+		for(int i = 0; i < players.size(); i++){
+			System.out.println(players.get(i).toUpperCase());
+		}
+		
+		
+      // clear out all the members of the ArrayList
+		players.clear();
+		System.out.println("\nArray list cleared.");
+      
+      // print out the ArrayList now and the size now.
+		System.out.println("\nArray list:");
+		for(int i = 0; i < players.size(); i++){
+			System.out.println(players.get(i).toString());
+		}
+		System.out.println("Array size: "+players.size());
+      
+   }
+}
