@@ -1,0 +1,77 @@
+package itp120mod5;
+
+/*created March 9, 2016 for IPT120Lab5_1516.doc #12
+ * 
+ */
+
+public class RainfallDriver {
+
+	//•	main which creates an array of rainfall values for a year.  
+	public static void main(String[] args) {
+		
+		double[] rain = {0.5, 0.3, 0.7, 1.2, 0.1, 0.8, 2.1, 0.5, 3.3, 2.8, 0.9, 1.2};
+		
+		//After you create the array in main, call each of the four methods so that they 
+		//can print their information.
+		 
+		total(rain);
+		average(rain);
+		max(rain);
+		min(rain);
+		
+	}
+	
+	//a method that calculates and prints the total rainfall for the year named total()
+	public static void total(double[] values){
+	      double total = 0.0;
+
+	      // add each element's value to total
+	      for ( int counter = 0; counter < values.length; counter++ )
+	         total = total + values[ counter ];
+	      
+	      //print the total rainfall
+	      System.out.println( "The total rainfall for the year is: " + total );
+	}
+	
+	//a method that calculates and prints the average monthly rainfall named average()
+	public static void average(double[] values){
+	      double avg = 0.0;
+	      double total = 0.0;
+
+	      // add each element's value to total
+	      for ( int counter = 0; counter < values.length; counter++ ) {
+	         total = total + values[ counter ]; 
+	      }
+	         //find the average
+	      avg = total / values.length;
+	      
+	      //print the average rainfall
+	      System.out.println( "The average rainfall for the year is: " + avg );
+	}      
+
+	//a method that determines and prints the maximum rain in any one month named max()
+	public static void max(double[] values){
+	      double max = values[0];//start w/ first element of the array
+
+	      // compare each element's value to find the maximum 
+	      for ( int counter = 0; counter < values.length; counter++ )
+	         if (max < values[counter]) {
+	        	max = values[counter]; 
+	         }
+	      //print the max rainfall
+	      System.out.println( "The maximum monthly rainfall for the year is: " + max );
+	}
+	
+	//a method that determines and prints the minimum rain in any one month named min()
+	public static void min(double[] values){
+	      double min = values[0];//start w/ first element of the array
+	      
+	      // compare each element's value to find the minimum
+	      for ( int counter = 0; counter < values.length; counter++ )
+	         if (min > values [counter]) {
+	        	min = values[ counter ]; 
+	         }
+	      //print the min rainfall
+	      System.out.println( "The minimum monthly rainfall for the year is: " + min );
+	}
+}
