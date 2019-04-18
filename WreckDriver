@@ -1,0 +1,99 @@
+package itp120mod5;
+import java.util.*;
+
+
+public class WreckDriver {
+
+		public static void main(String[] args) 
+        {
+		@SuppressWarnings("resource")
+		Scanner sc = new Scanner(System.in);
+		ArrayList<Customer> c = new ArrayList<Customer>();
+		ArrayList<Auto> a = new ArrayList<Auto>();
+		ArrayList<Rental> r = new ArrayList<Rental>();
+		loadNewData(a, c);
+		
+		boolean more = true;
+		while (more) 
+			{
+			
+			System.out.println("Customers:");
+			for (int i=0;i<c.size();i++)System.out.println(i+1 + " " + c.get(i).toString());
+		//customer list displayed and input requested from user//
+			System.out.println("\nWhich customer?");
+			int cust =sc.nextInt()-1;
+		//customer record checked for gold card member status//		
+			if(c.get(cust).isGoldCardMember())
+			System.out.println("This customer is a gold card member so we will treat him well!\n");
+			else 
+			System.out.println("This customer is not a gold card member\n");
+		
+			System.out.println("The following cars are available to rent...");
+			showCars(a);
+		//menu of cars available to rent is displayed and user is prompted for choice//
+			System.out.println("\nWhich auto?");
+			int car = sc.nextInt()-1;
+		
+			System.out.println("How many days do you wish to have this beautiful vehicle?");
+			int days = sc.nextInt();
+		//rental length determined//
+			Rental rent = new Rental(c.get(cust),a.get(car), days);
+			r.add(rent);
+			System.out.println(rent.toString());
+		//new rental record added to ArrayList 'r'//
+			
+		//user prompt - add more rentals, or continue on//
+			boolean inputIsInvalid = true;
+			while (inputIsInvalid) 
+				{
+				System.out.println("more rentals? (yes/no): ");		
+				String choice = sc.next();	
+				if ("yes".equalsIgnoreCase(choice))inputIsInvalid = false;
+						
+				else if ("no".equalsIgnoreCase(choice)){inputIsInvalid = false;
+					more = false;}
+				else System.err.print("Error: Only valid answers are 'yes' or 'no'.");
+				}
+		//if 'no' , rental summaries are printed //
+			}
+		System.out.println("\nRental Summary:");
+		printRentals(r);
+				
+        }
+
+	
+        
+        public static void loadNewData(ArrayList<Auto> a, ArrayList<Customer> c)
+        {
+            a.add(new Auto(2009,"Ford" , "Mustang","ABC123", 1256.54));
+            a.add(new Auto(2010,"Chevy","Camero","QWI459", 33.98));
+            a.add(new Auto(1970,"Pink","Cadillac","950AKH", 212874.51));
+            a.add(new Auto(2007,"Lotus","Elise MkII","1A2D3F", 12859.90));
+
+            c.add(new Customer( "Brett Farve",false));
+            c.add(new Customer( "Bruce Springsteen",true));
+            c.add(new Customer( "Mickey Mouse", true));
+            c.add(new Customer( "Peyton Manning", true));
+            c.add(new Customer( "Donald Duck", true));
+        }
+
+       
+        
+        //Prints the cars that are available for rent
+        public static void showCars(ArrayList<Auto> a)
+        {
+        	for (int i=0;i<a.size();i++)
+				System.out.println(i+1 + " " + a.get(i).toString());
+        	
+            
+        }
+        
+        // prints all the rentals that have been made
+        public static void printRentals(ArrayList<Rental> r)
+        {
+        	for (int i=0;i<r.size();i++)
+				System.out.println(r.get(i).toString());
+        	
+        }
+}
+
