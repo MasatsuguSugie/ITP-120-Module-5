@@ -1,0 +1,26 @@
+package itp120mod5;
+
+public class RandomDiceDriver {
+
+	public static void main(String[] args) {
+		int[] rolls = new int[7];
+		loadRolls(rolls);
+		printRolls(rolls);
+
+	}
+	
+	public static void loadRolls(int[] rollArray){
+		for (int i=0;i<100;i++){
+			int num = ((int)(Math.random() *6)) +1;
+			rollArray[num]++;
+		}
+	}
+	
+	public static void printRolls(int[] rollArray){
+		System.out.println("100 random rolls of the dice gave the following distribution:");
+		for (int i=1;i<rollArray.length;i++){
+			System.out.println(i + ": "+rollArray[i]);
+		}
+	}
+
+}
