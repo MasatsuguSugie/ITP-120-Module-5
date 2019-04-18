@@ -1,0 +1,98 @@
+package itp120mod5;
+
+
+import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+
+
+
+public class DrinkDriverArrayListV2 {
+
+
+	public static void main(String[] args) {
+		@SuppressWarnings("resource")
+		Scanner scan = new Scanner(System.in);
+		ArrayList<Drinks> drinks = new ArrayList<Drinks>();
+		boolean more = true;
+		//int counter = 0;
+		while (more) {
+			
+			System.out.println("What was the drink name?");
+			String drink = scan.nextLine();
+
+			boolean invalidSize = true;
+			char size = 0;
+			while (invalidSize){
+				System.out.println("What size? (S,M, or L)");
+				size = scan.next().trim().charAt(0);
+				if((size)=='S')invalidSize = false;
+				else if((size)=='M')invalidSize = false;
+				else if ((size)=='L')invalidSize = false;
+				else {System.err.print("Error: Only valid sizes are S,M, or L.\n");}
+				}
+			
+			
+			System.out.println("Enter the cost of each drink:");
+			double cost = scan.nextDouble();
+			
+			System.out.println("how many "+drink+"(s)"+" purchased?");
+			int num = scan.nextInt();
+			
+			Drinks d = new Drinks(drink, size, cost, num);
+			drinks.add(d);
+			//counter++;
+			
+			
+			boolean inputIsInvalid = true;
+			while (inputIsInvalid) {
+				System.out.println("more drinks? (y/n): ");		
+				String choice = scan.next();	
+				if ("y".equalsIgnoreCase(choice))inputIsInvalid = false;
+							
+				else if ("n".equalsIgnoreCase(choice)){inputIsInvalid = false;
+					more = false;}
+				else System.err.print("Error: Only valid answers are Y/N.");
+			}
+			scan.nextLine();
+		}
+					
+		printDrinks(drinks);
+		totNumOrdered(drinks);
+		grandTotal(drinks);
+		
+		
+	}
+		
+	public static void printDrinks(ArrayList<Drinks> drinks){
+		System.out.println("The orders are:");
+		for (int i=0;i<drinks.size();i++)		
+		{
+			System.out.println(drinks.get(i).toString());}
+		
+	}
+	public static void totNumOrdered(ArrayList<Drinks> drinks){
+		int totNumOrdered =0;
+		for(int i = 0; i<drinks.size(); i++){
+			totNumOrdered=totNumOrdered+ drinks.get(i).getNumOrdered();
+			}
+			System.out.println("\nThe total number of drinks purchased is "+totNumOrdered+".");
+		}
+	public static void grandTotal(ArrayList<Drinks> drinks){
+		NumberFormat money = NumberFormat.getCurrencyInstance();
+		double grandTotal = 0;
+		for(int i=0; i<drinks.size(); i++){
+			grandTotal = grandTotal+(drinks.get(i).getCostEach()* drinks.get(i).getNumOrdered());
+		}
+		System.out.println("The grand total of all drinks purchased on all orders is "
+		+money.format(grandTotal)+".");
+		}
+	}
+	
+
+	
+
+
+	
+
